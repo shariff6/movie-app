@@ -65,4 +65,17 @@ require("spec_helper")
         expect(Actor.all()).to(eq([actor2]))
       end
     end
+    describe("#movies") do
+  it("returns all of the movies a particular actor has been in") do
+    movie = Movie.new(:name => "Oceans Eleven", :id => nil)
+    movie.save()
+    movie2 = Movie.new(:name => "Oceans Twelve", :id => nil)
+    movie2.save()
+    actor = Actor.new(:name => "George Clooney", :id => nil)
+    actor.save()
+    actor.update(:movie_ids => [movie.id()])
+    actor.update(:movie_ids => [movie2.id()])
+    expect(actor.movies()).to(eq([movie, movie2]))
+  end
+end
   end
