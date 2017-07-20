@@ -54,7 +54,8 @@ class Actor
   end
 
 
-    define_method(:delete) do
+  define_method(:delete) do
+      DB.exec("DELETE FROM actors_movies WHERE actor_id = #{self.id()};")
       DB.exec("DELETE FROM actors WHERE id = #{self.id()};")
     end
   end
